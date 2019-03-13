@@ -119,12 +119,11 @@ for x in range(totalGames):
 	suppressPrintStatements = True
 	doors = setupDoors()
 	chooseDoor(doors)
-	remainingUnchosenDoor = revealLosingDoor(doors)
-	switchDoor(doors,remainingUnchosenDoor)
+	revealLosingDoor(doors)
 	if(isWinner(doors)):
 		numWins += 1
 
-print('Winning percentage when switching doors: ' + str(math.trunc((numWins / totalGames) * 100)) + '%')
+print('Winning percentage when keeping original door: ' + str(math.trunc((numWins / totalGames) * 100)) + '%')
 
 numWins = 0
 
@@ -132,8 +131,9 @@ for x in range(totalGames):
 	suppressPrintStatements = True
 	doors = setupDoors()
 	chooseDoor(doors)
-	revealLosingDoor(doors)
+	remainingUnchosenDoor = revealLosingDoor(doors)
+	switchDoor(doors,remainingUnchosenDoor)
 	if(isWinner(doors)):
 		numWins += 1
 
-print('Winning percentage when keeping original door: ' + str(math.trunc((numWins / totalGames) * 100)) + '%')
+print('Winning percentage when switching doors: ' + str(math.trunc((numWins / totalGames) * 100)) + '%')

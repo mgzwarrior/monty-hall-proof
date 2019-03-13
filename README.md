@@ -27,5 +27,6 @@ TBD
 # To-Do
 + Repalce 'empty' doors with goats
 + Review game scenarios for accuracy
+  + Switching percentage is currently 55% rather than the expected 66%
 + Document results
 + Performance improvements
