@@ -5,8 +5,20 @@ import random
 if(len(sys.argv) < 3):
 	print('ERROR: Invalid arguments - see README for running instructions')
 	sys.exit()
-totalGames = int(sys.argv[1])
-suppressPrintStatements = bool(sys.argv[2])
+
+if(sys.argv[1].isdigit()):
+	totalGames = int(sys.argv[1])
+else:
+	print('ERROR: Invalid argument at position 1 - value is not an integer')
+	sys.exit()
+
+if(sys.argv[2] == 'True'):
+	suppressPrintStatements = True
+elif(sys.argv[2] == 'False'):
+	suppressPrintStatements = False
+else:
+	print('ERROR: Invalid argument at position 2 - value does not map to a boolean value')
+	sys.exit()
 
 class Door:
 
@@ -116,7 +128,6 @@ def isWinner(doors):
 numWins = 0
 
 for x in range(totalGames):
-	suppressPrintStatements = True
 	doors = setupDoors()
 	chooseDoor(doors)
 	revealLosingDoor(doors)
@@ -128,7 +139,6 @@ print('Winning percentage when keeping original door: ' + str(math.trunc((numWin
 numWins = 0
 
 for x in range(totalGames):
-	suppressPrintStatements = True
 	doors = setupDoors()
 	chooseDoor(doors)
 	remainingUnchosenDoor = revealLosingDoor(doors)
