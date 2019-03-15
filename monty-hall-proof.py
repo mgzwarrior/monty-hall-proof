@@ -41,7 +41,7 @@ class Door:
 					print('Winner!  Door ' + str(self.number) + ' has a car behind it')
 			else:
 				if(not suppressPrintStatements):
-					print('Door ' + str(self.number) + ' is open and empty')
+					print('Door ' + str(self.number) + ' is open and has a goat')
 
 	def choose(self):
 		if(self.isChosen):
@@ -58,7 +58,7 @@ class Door:
 			print('ERROR: Door ' + str(self.number) + ' is not chosen already')
 			sys.exit()
 		else:
-			self.isChosen = True
+			self.isChosen = False
 
 	def printDoor(self):
 		if(not suppressPrintStatements):
@@ -125,6 +125,10 @@ def isWinner(doors):
 				print('Sorry, Door ' + str(door.number) + ' is empty')
 			return False
 
+print('Monty Hall Problem Results')
+print('--------------------------')
+print('Expected winning percentage when keeping original door: 33%')
+
 numWins = 0
 
 for x in range(totalGames):
@@ -134,7 +138,9 @@ for x in range(totalGames):
 	if(isWinner(doors)):
 		numWins += 1
 
-print('Winning percentage when keeping original door: ' + str(math.trunc((numWins / totalGames) * 100)) + '%')
+print('Actual winning percentage when keeping original door: ' + str(math.trunc((numWins / totalGames) * 100)) + '%')
+print('---------------------------------------------------------')
+print('Expected winning percentage when switching doors: 66%')
 
 numWins = 0
 
@@ -146,4 +152,5 @@ for x in range(totalGames):
 	if(isWinner(doors)):
 		numWins += 1
 
-print('Winning percentage when switching doors: ' + str(math.trunc((numWins / totalGames) * 100)) + '%')
+print('Actual winning percentage when switching doors: ' + str(math.trunc((numWins / totalGames) * 100)) + '%')
+print('--------------------------')

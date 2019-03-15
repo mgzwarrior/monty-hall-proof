@@ -25,8 +25,9 @@ This section outlines how to run the script.
 TBD
 
 # To-Do
-+ Repalce 'empty' doors with goats
-+ Review game scenarios for accuracy
-  + Switching percentage is currently 55% rather than the expected 66%
++ ~~Repalce 'empty' doors with goats~~
++ ~~Review game scenarios for accuracy~~
+  + ~~Switching percentage is currently 55% rather than the expected 66%~~
+    + Door.unchoose() was not flipping hasCar to False
 + Document results
-+ Performance improvements
++ Make game playable for user
