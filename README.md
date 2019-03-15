@@ -22,12 +22,22 @@ This section outlines how to run the script.
 `python3 monty-hall-proof.py 100000 True`
 
 # Results
-TBD
+After optimizing for accuracy, the program was run to simulate 100,000 games (for statistical significance).  The results of this run were as follows:
+`$ python3 monty-hall-proof.py 100000 True
+Monty Hall Problem Results
+--------------------------
+Expected winning percentage when keeping original door: 33%
+Actual winning percentage when keeping original door: 33%
+---------------------------------------------------------
+Expected winning percentage when switching doors: 66%
+Actual winning percentage when switching doors: 66%
+--------------------------`
 
 # To-Do
 + ~~Repalce 'empty' doors with goats~~
 + ~~Review game scenarios for accuracy~~
   + ~~Switching percentage is currently 55% rather than the expected 66%~~
     + Door.unchoose() was not flipping hasCar to False
-+ Document results
++ ~~Document results~~
 + Make game playable for user
++ Change explicit True/False logging argument to a '-v' for verbose
