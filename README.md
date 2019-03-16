@@ -17,9 +17,10 @@ This section outlines how to run the script.
 ## Input Arguments
 1. Number of games for each scenario (eg. 100, 1000, etc.)
 2. Enable/disable logging (eg. True or False)
+3. Enable/disable gameplay mode (eg. True or False)
 
 ### Example
-`python3 monty-hall-proof.py 100000 True`
+`python3 monty-hall-proof.py 100000 True -p`
 
 # Results
 After optimizing for accuracy, the program was run to simulate 100,000 games (for statistical significance).  The results of this run were as follows:
@@ -40,4 +41,7 @@ Actual winning percentage when switching doors: 66%
     + Door.unchoose() was not flipping hasCar to False
 + ~~Document results~~
 + Make game playable for user
-+ Change explicit True/False logging argument to a '-v' for verbose
++ Apply better argument parsing using argparse
+  + Change explicit True/False logging argument to a '--verbose' or -v'
+  + Change explicit True/False gameplay argument to a '--play-game' or -p'
++ Performance enhancements

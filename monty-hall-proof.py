@@ -2,7 +2,7 @@ import sys
 import math
 import random
 
-if(len(sys.argv) < 3):
+if(len(sys.argv) < 4):
 	print('ERROR: Invalid arguments - see README for running instructions')
 	sys.exit()
 
@@ -18,6 +18,14 @@ elif(sys.argv[2] == 'False'):
 	suppressPrintStatements = False
 else:
 	print('ERROR: Invalid argument at position 2 - value does not map to a boolean value')
+	sys.exit()
+
+if(sys.argv[3] == 'True'):
+	playGame = True
+elif(sys.argv[3] == 'False'):
+	playGame = False
+else:
+	print('ERROR: Invalid argument at position 3 - value does not map to a boolean value')
 	sys.exit()
 
 class Door:
@@ -125,32 +133,36 @@ def isWinner(doors):
 				print('Sorry, Door ' + str(door.number) + ' is empty')
 			return False
 
-print('Monty Hall Problem Results')
-print('--------------------------')
-print('Expected winning percentage when keeping original door: 33%')
+if(playGame):
+	print('Let\'s Make a Deal!')
+	# Add game play
+else:
+	print('Monty Hall Problem Results')
+	print('--------------------------')
+	print('Expected winning percentage when keeping original door: 33%')
 
-numWins = 0
+	numWins = 0
 
-for x in range(totalGames):
-	doors = setupDoors()
-	chooseDoor(doors)
-	revealLosingDoor(doors)
-	if(isWinner(doors)):
-		numWins += 1
+	for x in range(totalGames):
+		doors = setupDoors()
+		chooseDoor(doors)
+		revealLosingDoor(doors)
+		if(isWinner(doors)):
+			numWins += 1
 
-print('Actual winning percentage when keeping original door: ' + str(math.trunc((numWins / totalGames) * 100)) + '%')
-print('---------------------------------------------------------')
-print('Expected winning percentage when switching doors: 66%')
+	print('Actual winning percentage when keeping original door: ' + str(math.trunc((numWins / totalGames) * 100)) + '%')
+	print('---------------------------------------------------------')
+	print('Expected winning percentage when switching doors: 66%')
 
-numWins = 0
+	numWins = 0
 
-for x in range(totalGames):
-	doors = setupDoors()
-	chooseDoor(doors)
-	remainingUnchosenDoor = revealLosingDoor(doors)
-	switchDoor(doors,remainingUnchosenDoor)
-	if(isWinner(doors)):
-		numWins += 1
+	for x in range(totalGames):
+		doors = setupDoors()
+		chooseDoor(doors)
+		remainingUnchosenDoor = revealLosingDoor(doors)
+		switchDoor(doors,remainingUnchosenDoor)
+		if(isWinner(doors)):
+			numWins += 1
 
-print('Actual winning percentage when switching doors: ' + str(math.trunc((numWins / totalGames) * 100)) + '%')
-print('--------------------------')
+	print('Actual winning percentage when switching doors: ' + str(math.trunc((numWins / totalGames) * 100)) + '%')
+	print('--------------------------')
