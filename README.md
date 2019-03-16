@@ -20,7 +20,7 @@ This section outlines how to run the script.
 3. Enable/disable gameplay mode (eg. True or False)
 
 ### Example
-`python3 monty-hall-proof.py 100000 True -p`
+`python3 monty-hall-proof.py 100000 True False`
 
 # Results
 After optimizing for accuracy, the program was run to simulate 100,000 games (for statistical significance).  The results of this run were as follows:
