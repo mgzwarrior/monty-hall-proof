@@ -24,7 +24,8 @@ This section outlines how to run the script.
 
 # Results
 After optimizing for accuracy, the program was run to simulate 100,000 games (for statistical significance).  The results of this run were as follows:
-`$ python3 monty-hall-proof.py 100000 True
+```
+$ python3 monty-hall-proof.py 100000 True
 Monty Hall Problem Results
 --------------------------
 Expected winning percentage when keeping original door: 33%
@@ -32,7 +33,8 @@ Actual winning percentage when keeping original door: 33%
 ---------------------------------------------------------
 Expected winning percentage when switching doors: 66%
 Actual winning percentage when switching doors: 66%
---------------------------`
+--------------------------
+```
 
 # To-Do
 + ~~Repalce 'empty' doors with goats~~
