@@ -14,10 +14,13 @@ In theory, contestants who switch to the remaining unopened door will win the ca
 # Running Instructions
 This section outlines how to run the script.
 
-## Input Arguments
-1. Number of games for each scenario (eg. 100, 1000, etc.)
-2. Enable/disable logging (eg. True or False)
-3. Enable/disable gameplay mode (eg. True or False)
+## Command Line Arguments
+```
+-h, --help           		show help message and exit
+-p, --play-game       		switch to enable live game play
+-t TG, --total-games TG 	the total number of games the simulator will run
+-v, --verbose         		switch to enable verbose print statements
+```
 
 ### Example
 `python3 monty-hall-proof.py 100000 True False`
