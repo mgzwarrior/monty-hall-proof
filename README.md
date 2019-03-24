@@ -30,15 +30,29 @@ This section outlines how to run the script.
 # Results
 After optimizing for accuracy, the program was run to simulate 100,000 games (for statistical significance).  The results of this run were as follows:
 ```
-$ python3 monty-hall-proof.py 100000 True
+$ python3 monty-hall-proof.py -t 100000
+------------------------------------------------------------------------------------------------------------------------
+Let's Make a Deal!
+------------------------------------------------------------------------------------------------------------------------
+Imagine you're on a game show, and you're given the choice of three doors.
+Behind one door is a car; behind the others, goats.
+You can choose any door that you wish, then the host will reveal one of the losing doors.
+Next, you will be given the chance to switch your original choice with the remaining door, but is that in your best interest?
+------------------------------------------------------------------------------------------------------------------------
+Simulating keeping original door 100000 time(s)
+------------------------------------------------------------------------------------------------------------------------
+Simulating switching door 100000 time(s)
+------------------------------------------------------------------------------------------------------------------------
 Monty Hall Problem Results
---------------------------
+------------------------------------------------------------------------------------------------------------------------
+Total games played: 100000
+------------------------------------------------------------------------------------------------------------------------
 Expected winning percentage when keeping original door: 33%
 Actual winning percentage when keeping original door: 33%
----------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 Expected winning percentage when switching doors: 66%
 Actual winning percentage when switching doors: 66%
---------------------------
+------------------------------------------------------------------------------------------------------------------------
 ```
 
 # To-Do
