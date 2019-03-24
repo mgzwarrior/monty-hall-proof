@@ -17,12 +17,15 @@ This section outlines how to run the script.
 ```
 -h, --help           		show help message and exit
 -p, --play-game       		switch to enable live game play
--t TG, --total-games TG 	the total number of games the simulator will run
+-t TG, --total-games TG 	the total number of games the simulator will run (default: 1000000)
 -v, --verbose         		switch to enable verbose print statements
 ```
 
-### Example
-`python3 monty-hall-proof.py 100000 True False`
+### Examples
+#### Simulate Game 100 Times
+`python3 monty-hall-proof.py -t 100`
+#### Play Game
+`python3 monty-hall-proof.py -p`
 
 # Results
 After optimizing for accuracy, the program was run to simulate 100,000 games (for statistical significance).  The results of this run were as follows:

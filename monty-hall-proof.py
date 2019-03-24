@@ -5,7 +5,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description='A program to prove the Monty Hall problem.')
 parser.add_argument('-p','--play-game',action='store_true',dest='playGame',help='switch to enable live game play')
-parser.add_argument('-t','--total-games',action='store',dest='totalGames',default=1000000,metavar='TG',type=int,help='the total number of games the simulator will run')
+parser.add_argument('-t','--total-games',action='store',dest='totalGames',default=1000000,metavar='TG',type=int,help='the total number of games the simulator will run (default: 1000000)')
 parser.add_argument('-v','--verbose',action='store_true',help='switch to enable verbose print statements')
 
 args = parser.parse_args()
