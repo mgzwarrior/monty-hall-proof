@@ -43,7 +43,7 @@ Actual winning percentage when switching doors: 66%
     + Door.unchoose() was not flipping hasCar to False
 + ~~Document results~~
 + ~~Make game playable for user~~
-+ Apply better argument parsing using argparse
-  + Change explicit True/False logging argument to a '--verbose' or -v'
-  + Change explicit True/False gameplay argument to a '--play-game' or -p'
++ ~~Apply better argument parsing using argparse~~
+  + ~~Change explicit True/False logging argument to a '--verbose' or -v'~~
+  + ~~Change explicit True/False gameplay argument to a '--play-game' or -p'~~
 + Performance enhancements

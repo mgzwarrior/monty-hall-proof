@@ -1,32 +1,17 @@
 import sys
 import math
 import random
+import argparse
 
-if(len(sys.argv) < 4):
-	print('ERROR: Invalid arguments - see README for running instructions')
-	sys.exit()
+parser = argparse.ArgumentParser(description='A program to prove the Monty Hall problem.')
+parser.add_argument('-p','--play-game',action='store_true',dest='playGame',help='switch to enable live game play')
+parser.add_argument('-t','--total-games',action='store',dest='totalGames',default=1000000,metavar='TG',type=int,help='the total number of games the simulator will run')
+parser.add_argument('-v','--verbose',action='store_true',help='switch to enable verbose print statements')
 
-if(sys.argv[1].isdigit()):
-	totalGames = int(sys.argv[1])
-else:
-	print('ERROR: Invalid argument at position 1 - value must be an integer')
-	sys.exit()
+args = parser.parse_args()
 
-if(sys.argv[2] == 'True'):
-	suppressPrintStatements = True
-elif(sys.argv[2] == 'False'):
-	suppressPrintStatements = False
-else:
-	print('ERROR: Invalid argument at position 2 - value must map to a boolean value')
-	sys.exit()
-
-if(sys.argv[3] == 'True'):
-	playGame = True
-elif(sys.argv[3] == 'False'):
-	playGame = False
-else:
-	print('ERROR: Invalid argument at position 3 - value must map to a boolean value')
-	sys.exit()
+if(args.playGame and not args.verbose):
+	args.verbose = True
 
 class Door:
 
@@ -38,17 +23,17 @@ class Door:
 
 	def open(self):
 		if(self.status == 'open'):
-			if(not suppressPrintStatements):
+			if(args.verbose):
 				print('ERROR: Door ' + str(self.number) + ' is already ' + self.status)
 				sys.exit()
 		else:
 			self.status = 'open'
 
 			if(self.hasCar):
-				if(not suppressPrintStatements):
+				if(args.verbose):
 					print('Winner!  Door ' + str(self.number) + ' has a car behind it')
 			else:
-				if(not suppressPrintStatements):
+				if(args.verbose):
 					print('Door ' + str(self.number) + ' is open and has a goat')
 
 	def choose(self):
@@ -58,7 +43,7 @@ class Door:
 		else:
 			self.isChosen = True
 
-			if(not suppressPrintStatements):
+			if(args.verbose):
 					print('Door ' + str(self.number) + ' has been chosen')
 
 	def unchoose(self):
@@ -69,7 +54,7 @@ class Door:
 			self.isChosen = False
 
 	def printDoor(self):
-		if(not suppressPrintStatements):
+		if(args.verbose):
 			print('Door ' + str(self.number) + ' is ' + self.status)
 
 # Helper methods
@@ -120,6 +105,7 @@ def revealLosingDoor(doors):
 	for door in doors:
 		if(door.isChosen):
 			continue
+
 		unchosenDoors.append(door)
 
 	for door in unchosenDoors:
@@ -145,19 +131,22 @@ def isWinner(doors):
 		if(door.isChosen and door.hasCar):
 			door.open()
 			return True
+
 		if(door.isChosen and not door.hasCar):
-			if(not suppressPrintStatements):
+			if(args.verbose):
 				print('Sorry, Door ' + str(door.number) + ' has a goat')
 			return False
 
 def printResults(totalGames,numStayed,numWinsStayed,numSwitched,numWinsSwitched):
 	if(totalGames == 0):
-		sys.exit()
+		return
 
-	if(playGame):
+	if(args.playGame):
 		print('------------------------------------------------------------------------------------------------------------------------')
 
 	print('Monty Hall Problem Results')
+	print('------------------------------------------------------------------------------------------------------------------------')
+	print('Total games played: ' + str(totalGames))
 	print('------------------------------------------------------------------------------------------------------------------------')
 
 	if(numStayed == 0):
@@ -178,11 +167,12 @@ def printResults(totalGames,numStayed,numWinsStayed,numSwitched,numWinsSwitched)
 
 # Main program logic
 
+print('------------------------------------------------------------------------------------------------------------------------')
 print('Let\'s Make a Deal!')
 print('------------------------------------------------------------------------------------------------------------------------')
-printInstructions(playGame)
+printInstructions(args.playGame)
 
-if(playGame):
+if(args.playGame):
 	totalGames = 0
 	numSwitched = 0
 	numWinsSwitched = 0
@@ -192,6 +182,7 @@ if(playGame):
 	while True:
 		didSwitch = False
 		doors = setupDoors()
+
 		while True:
 			userInput = input('Please choose a door: ')
 			if(userInput.lower() == 'exit'):
@@ -202,8 +193,10 @@ if(playGame):
 				print('ERROR: Value entered must be a number between 1 and 3')
 			else:
 				break
+
 		chooseDoor(doors,int(userInput))
 		remainingUnchosenDoor = revealLosingDoor(doors)
+
 		while True:
 			switch = input('Would you like to switch Door ' + userInput + ' with Door ' + str
 				(remainingUnchosenDoor.number) + '? Type \'y\' for yes, \'n\' for no: ')
@@ -217,16 +210,20 @@ if(playGame):
 			elif(switch.lower() == 'exit'):
 				printResults(totalGames,numStayed,numWinsStayed,numSwitched,numWinsSwitched)
 				print('Thanks for playing!')
+				print('------------------------------------------------------------------------------------------------------------------------')
 				sys.exit()
 			else:
 				numStayed += 1
 				break
+
+		totalGames += 1
+
 		if(isWinner(doors)):
-			totalGames += 1
 			if(didSwitch):
 				numWinsSwitched += 1
 			else:
 				numWinsStayed += 1
+
 		while True:
 			playAgain = input('Play again? Type \'y\' for yes, \'n\' for no: ')
 			if(not playAgain.lower() in ['y','n','exit']):
@@ -234,6 +231,7 @@ if(playGame):
 			elif(playAgain.lower() == 'n' or playAgain.lower() == 'exit'):
 				printResults(totalGames,numStayed,numWinsStayed,numSwitched,numWinsSwitched)
 				print('Thanks for playing!')
+				print('------------------------------------------------------------------------------------------------------------------------')
 				sys.exit()
 			else:
 				break
@@ -241,7 +239,15 @@ else:
 	numStayed = 0
 	numWinsStayed = 0
 
-	for x in range(totalGames):
+	print('Simulating keeping original door ' + str(args.totalGames) + ' time(s)')
+	print('------------------------------------------------------------------------------------------------------------------------')
+
+	for x in range(args.totalGames):
+		if(args.verbose):
+			print('----------')
+			print('Game ' + str(x + 1))
+			print('----------')
+
 		doors = setupDoors()
 		chooseDoor(doors,None)
 		revealLosingDoor(doors)
@@ -252,7 +258,15 @@ else:
 	numSwitched = 0
 	numWinsSwitched = 0
 
-	for x in range(totalGames):
+	print('Simulating switching door ' + str(args.totalGames) + ' time(s)')
+	print('------------------------------------------------------------------------------------------------------------------------')
+
+	for x in range(args.totalGames):
+		if(args.verbose):
+			print('----------')
+			print('Game ' + str(x + 1))
+			print('----------')
+
 		doors = setupDoors()
 		chooseDoor(doors,None)
 		remainingUnchosenDoor = revealLosingDoor(doors)
@@ -261,4 +275,4 @@ else:
 			numWinsSwitched += 1
 		numSwitched += 1
 
-	printResults(totalGames,numStayed,numWinsStayed,numSwitched,numWinsSwitched)
+	printResults(args.totalGames,numStayed,numWinsStayed,numSwitched,numWinsSwitched)
