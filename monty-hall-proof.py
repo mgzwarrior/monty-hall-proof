@@ -147,7 +147,7 @@ def isWinner(doors):
 			return True
 		if(door.isChosen and not door.hasCar):
 			if(not suppressPrintStatements):
-				print('Sorry, Door ' + str(door.number) + ' is empty')
+				print('Sorry, Door ' + str(door.number) + ' has a goat')
 			return False
 
 def printResults(totalGames,numStayed,numWinsStayed,numSwitched,numWinsSwitched):
